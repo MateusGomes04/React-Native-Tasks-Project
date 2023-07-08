@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
-import {View, Text, StyleSheet, ImageBackground, } from 'react-native';
+import {View, Text, StyleSheet, ImageBackground} from 'react-native';
 
 import commonStyles from '../../commonStyles';
-import TodayImage from "../../assets/imgs/today.jpg"
+import TodayImage from '../../assets/imgs/today.jpg';
+
+import Task from '../../components/Task';
 
 import moment from 'moment';
 
@@ -10,9 +12,7 @@ import 'moment/locale/pt-br';
 
 export default class TaskList extends Component {
   render() {
-    const today = moment()
-      .locale('pt-br')
-      .format('ddd, D [de] MMMM');
+    const today = moment().locale('pt-br').format('ddd, D [de] MMMM');
     return (
       <View style={styles.container}>
         <ImageBackground source={TodayImage} style={styles.background}>
@@ -22,9 +22,108 @@ export default class TaskList extends Component {
           </View>
         </ImageBackground>
         <View style={styles.taskList}>
-          <Text>Task #01</Text>
-          <Text>Task #02</Text>
-          <Text>Task #03</Text>
+          <Task
+            desc="Buy Book"
+            estimateAt={new Date()}
+            doneAt={new Date()}
+          />
+          <Task desc="Read a Book" estimateAt={new Date()} doneAt={null} />
+          <Task
+            desc="Buy Book"
+            estimateAt={new Date()}
+            doneAt={new Date()}
+          />
+          <Task desc="Read a Book" estimateAt={new Date()} doneAt={null} />
+          <Task
+            desc="Buy Book"
+            estimateAt={new Date()}
+            doneAt={new Date()}
+          />
+          <Task desc="Read a Book" estimateAt={new Date()} doneAt={null} />
+          <Task
+            desc="Buy Book"
+            estimateAt={new Date()}
+            doneAt={new Date()}
+          />
+          <Task desc="Read a Book" estimateAt={new Date()} doneAt={null} />
+          <Task
+            desc="Buy Book"
+            estimateAt={new Date()}
+            doneAt={new Date()}
+          />
+          <Task desc="Read a Book" estimateAt={new Date()} doneAt={null} />
+          <Task
+            desc="Buy Book"
+            estimateAt={new Date()}
+            doneAt={new Date()}
+          />
+          <Task desc="Read a Book" estimateAt={new Date()} doneAt={null} />
+          <Task
+            desc="Buy Book"
+            estimateAt={new Date()}
+            doneAt={new Date()}
+          />
+          <Task desc="Read a Book" estimateAt={new Date()} doneAt={null} />
+          <Task
+            desc="Buy Book"
+            estimateAt={new Date()}
+            doneAt={new Date()}
+          />
+          <Task desc="Read a Book" estimateAt={new Date()} doneAt={null} />
+          <Task
+            desc="Buy Book"
+            estimateAt={new Date()}
+            doneAt={new Date()}
+          />
+          <Task desc="Read a Book" estimateAt={new Date()} doneAt={null} />
+          <Task
+            desc="Buy Book"
+            estimateAt={new Date()}
+            doneAt={new Date()}
+          />
+          <Task desc="Read a Book" estimateAt={new Date()} doneAt={null} />
+          <Task
+            desc="Buy Book"
+            estimateAt={new Date()}
+            doneAt={new Date()}
+          />
+          <Task desc="Read a Book" estimateAt={new Date()} doneAt={null} />
+          <Task
+            desc="Buy Book"
+            estimateAt={new Date()}
+            doneAt={new Date()}
+          />
+          <Task desc="Read a Book" estimateAt={new Date()} doneAt={null} />
+          <Task
+            desc="Buy Book"
+            estimateAt={new Date()}
+            doneAt={new Date()}
+          />
+          <Task desc="Read a Book" estimateAt={new Date()} doneAt={null} />
+          <Task
+            desc="Buy Book"
+            estimateAt={new Date()}
+            doneAt={new Date()}
+          />
+          <Task desc="Read a Book" estimateAt={new Date()} doneAt={null} />
+          <Task
+            desc="Buy Book"
+            estimateAt={new Date()}
+            doneAt={new Date()}
+          />
+          <Task desc="Read a Book" estimateAt={new Date()} doneAt={null} />
+          <Task
+            desc="Buy Book"
+            estimateAt={new Date()}
+            doneAt={new Date()}
+          />
+          <Task desc="Read a Book" estimateAt={new Date()} doneAt={null} />
+          <Task
+            desc="Buy Book"
+            estimateAt={new Date()}
+            doneAt={new Date()}
+          />
+          <Task desc="Read a Book" estimateAt={new Date()} doneAt={null} />
         </View>
       </View>
     );
@@ -49,13 +148,13 @@ const styles = StyleSheet.create({
     color: commonStyles.colors.secondary,
     marginLeft: 20,
     marginBottom: 20,
-    fontSize: 50
+    fontSize: 50,
   },
   subtitle: {
     fontFamily: commonStyles.fontFamily,
     color: commonStyles.colors.secondary,
     marginLeft: 20,
     marginBottom: 30,
-    fontSize: 20
+    fontSize: 20,
   },
 });
