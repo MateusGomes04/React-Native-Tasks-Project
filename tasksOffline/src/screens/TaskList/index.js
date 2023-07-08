@@ -7,7 +7,7 @@ import {
   FlatList,
   TouchableOpacity,
   Platform,
-  Alert
+  Alert,
 } from 'react-native';
 
 import commonStyles from '../../commonStyles';
@@ -90,6 +90,11 @@ export default class TaskList extends Component {
     this.setState({tasks, showAddTask: false}, this.filterTasks);
   };
 
+  deleteTask = id => {
+    const tasks = this.state.tasks.filter(task => task.id !== id);
+    this.setState({tasks}, this.filterTasks);
+  };
+
   render() {
     const today = moment().locale('pt-br').format('ddd, D [de] MMMM');
     return (
@@ -119,7 +124,11 @@ export default class TaskList extends Component {
             data={this.state.visibleTasks}
             keyExtractor={item => `${item.id}`}
             renderItem={({item}) => (
-              <Task {...item} toggleTask={this.toggleTask} />
+              <Task
+                {...item}
+                onToggleTask={this.toggleTask}
+                onDelete={this.deleteTask}
+              />
             )}
           />
         </View>
