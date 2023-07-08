@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, Text, StyleSheet, ImageBackground} from 'react-native';
+import {View, Text, StyleSheet, ImageBackground, FlatList} from 'react-native';
 
 import commonStyles from '../../commonStyles';
 import TodayImage from '../../assets/imgs/today.jpg';
@@ -11,6 +11,22 @@ import moment from 'moment';
 import 'moment/locale/pt-br';
 
 export default class TaskList extends Component {
+  state = {
+    tasks: [
+      {
+        id: Math.random(),
+        desc: 'Buy Ruby on Rails Book',
+        estimateAt: new Date(),
+        doneAt: new Date(),
+      },
+      {
+        id: Math.random(),
+        desc: 'Read Ruby on Rails Book',
+        estimateAt: new Date(),
+        doneAt: null,
+      },
+    ],
+  };
   render() {
     const today = moment().locale('pt-br').format('ddd, D [de] MMMM');
     return (
@@ -22,108 +38,11 @@ export default class TaskList extends Component {
           </View>
         </ImageBackground>
         <View style={styles.taskList}>
-          <Task
-            desc="Buy Book"
-            estimateAt={new Date()}
-            doneAt={new Date()}
+          <FlatList
+            data={this.state.tasks}
+            keyExtractor={item => `${item.id}`}
+            renderItem={({item}) => <Task {...item} />}
           />
-          <Task desc="Read a Book" estimateAt={new Date()} doneAt={null} />
-          <Task
-            desc="Buy Book"
-            estimateAt={new Date()}
-            doneAt={new Date()}
-          />
-          <Task desc="Read a Book" estimateAt={new Date()} doneAt={null} />
-          <Task
-            desc="Buy Book"
-            estimateAt={new Date()}
-            doneAt={new Date()}
-          />
-          <Task desc="Read a Book" estimateAt={new Date()} doneAt={null} />
-          <Task
-            desc="Buy Book"
-            estimateAt={new Date()}
-            doneAt={new Date()}
-          />
-          <Task desc="Read a Book" estimateAt={new Date()} doneAt={null} />
-          <Task
-            desc="Buy Book"
-            estimateAt={new Date()}
-            doneAt={new Date()}
-          />
-          <Task desc="Read a Book" estimateAt={new Date()} doneAt={null} />
-          <Task
-            desc="Buy Book"
-            estimateAt={new Date()}
-            doneAt={new Date()}
-          />
-          <Task desc="Read a Book" estimateAt={new Date()} doneAt={null} />
-          <Task
-            desc="Buy Book"
-            estimateAt={new Date()}
-            doneAt={new Date()}
-          />
-          <Task desc="Read a Book" estimateAt={new Date()} doneAt={null} />
-          <Task
-            desc="Buy Book"
-            estimateAt={new Date()}
-            doneAt={new Date()}
-          />
-          <Task desc="Read a Book" estimateAt={new Date()} doneAt={null} />
-          <Task
-            desc="Buy Book"
-            estimateAt={new Date()}
-            doneAt={new Date()}
-          />
-          <Task desc="Read a Book" estimateAt={new Date()} doneAt={null} />
-          <Task
-            desc="Buy Book"
-            estimateAt={new Date()}
-            doneAt={new Date()}
-          />
-          <Task desc="Read a Book" estimateAt={new Date()} doneAt={null} />
-          <Task
-            desc="Buy Book"
-            estimateAt={new Date()}
-            doneAt={new Date()}
-          />
-          <Task desc="Read a Book" estimateAt={new Date()} doneAt={null} />
-          <Task
-            desc="Buy Book"
-            estimateAt={new Date()}
-            doneAt={new Date()}
-          />
-          <Task desc="Read a Book" estimateAt={new Date()} doneAt={null} />
-          <Task
-            desc="Buy Book"
-            estimateAt={new Date()}
-            doneAt={new Date()}
-          />
-          <Task desc="Read a Book" estimateAt={new Date()} doneAt={null} />
-          <Task
-            desc="Buy Book"
-            estimateAt={new Date()}
-            doneAt={new Date()}
-          />
-          <Task desc="Read a Book" estimateAt={new Date()} doneAt={null} />
-          <Task
-            desc="Buy Book"
-            estimateAt={new Date()}
-            doneAt={new Date()}
-          />
-          <Task desc="Read a Book" estimateAt={new Date()} doneAt={null} />
-          <Task
-            desc="Buy Book"
-            estimateAt={new Date()}
-            doneAt={new Date()}
-          />
-          <Task desc="Read a Book" estimateAt={new Date()} doneAt={null} />
-          <Task
-            desc="Buy Book"
-            estimateAt={new Date()}
-            doneAt={new Date()}
-          />
-          <Task desc="Read a Book" estimateAt={new Date()} doneAt={null} />
         </View>
       </View>
     );
