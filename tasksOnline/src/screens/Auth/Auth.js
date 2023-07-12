@@ -8,24 +8,62 @@ import {
   Alert,
 } from 'react-native';
 
+import axios from 'axios';
+
 import backgroundImage from '../../assets/imgs/login.jpg';
 import commonStyles from '../commonStyles';
-import AuthInput from '../../components/AuthInput';
+import AuthInput from '../components/AuthInput';
+
+import {server, showError, showSuccess} from '../common';
+
+const initialState = {
+  name: '',
+  email: '',
+  password: '',
+  confirmPassword: '',
+  stageNew: false,
+};
 
 export default class Auth extends Component {
   state = {
-    name: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
-    stageNew: false,
+    ...initialState,
   };
 
   signinOrSignup = () => {
     if (this.state.stageNew) {
-      Alert.alert('Success!', 'Create account');
+      this.signUp();
     } else {
-      Alert.alert('Success', 'Logar');
+      this.signin();
+    }
+  };
+
+  signUp = async () => {
+    try {
+      await axios.post(`${server}/signup`, {
+        name: this.state.name,
+        email: this.state.email,
+        password: this.state.password,
+        confirmPassword: this.state.confirmPassword,
+      });
+
+      showSuccess('Usuário cadastro!');
+      this.setState({...initialState});
+    } catch (e) {
+      showError(e);
+    }
+  };
+
+  signin = async () => {
+    try {
+      const res = await axios.post(`${server}/signin`, {
+        email: this.state.email,
+        password: this.state.password,
+      });
+
+      axios.defaults.headers.common.Authorization = `bearer ${res.data.token}`;
+      this.props.navigation.navigate('Home');
+    } catch (e) {
+      showError(e);
     }
   };
 
@@ -39,20 +77,23 @@ export default class Auth extends Component {
           </Text>
           {this.state.stageNew && (
             <AuthInput
-              placeholder="Name"
+              icon="user"
+              placeholder="Nome"
               value={this.state.name}
               style={styles.input}
               onChangeText={name => this.setState({name})}
             />
           )}
           <AuthInput
+            icon="at"
             placeholder="E-mail"
             value={this.state.email}
             style={styles.input}
             onChangeText={email => this.setState({email})}
           />
           <AuthInput
-            placeholder="Password"
+            icon="lock"
+            placeholder="Senha"
             value={this.state.password}
             style={styles.input}
             secureTextEntry={true}
@@ -60,7 +101,8 @@ export default class Auth extends Component {
           />
           {this.state.stageNew && (
             <AuthInput
-              placeholder="Confirmate Password"
+              icon="asterisk"
+              placeholder="Confirmação de Senha"
               value={this.state.confirmPassword}
               style={styles.input}
               secureTextEntry={true}
@@ -70,7 +112,7 @@ export default class Auth extends Component {
           <TouchableOpacity onPress={this.signinOrSignup}>
             <View style={styles.button}>
               <Text style={styles.buttonText}>
-                {this.state.stageNew ? 'Register' : 'Logar'}
+                {this.state.stageNew ? 'Registrar' : 'Entrar'}
               </Text>
             </View>
           </TouchableOpacity>
@@ -80,15 +122,14 @@ export default class Auth extends Component {
           onPress={() => this.setState({stageNew: !this.state.stageNew})}>
           <Text style={styles.buttonText}>
             {this.state.stageNew
-              ? 'Already have an account?'
-              : 'Dont have an account yet?'}
+              ? 'Já possui conta?'
+              : 'Ainda não possui conta?'}
           </Text>
         </TouchableOpacity>
       </ImageBackground>
     );
   }
 }
-
 const styles = StyleSheet.create({
   background: {
     flex: 1,
@@ -119,11 +160,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFF',
   },
   button: {
-    borderRadius: 7,
     backgroundColor: '#080',
     marginTop: 10,
     padding: 10,
     alignItems: 'center',
+    borderRadius: 7,
   },
   buttonText: {
     fontFamily: commonStyles.fontFamily,
