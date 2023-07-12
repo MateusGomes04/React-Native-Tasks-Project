@@ -4,14 +4,13 @@ import {
   Text,
   StyleSheet,
   View,
-  TextInput,
   TouchableOpacity,
-  Platform,
   Alert,
 } from 'react-native';
 
 import backgroundImage from '../../assets/imgs/login.jpg';
 import commonStyles from '../commonStyles';
+import AuthInput from '../../components/AuthInput';
 
 export default class Auth extends Component {
   state = {
@@ -39,20 +38,20 @@ export default class Auth extends Component {
             {this.state.stageNew ? 'Crie a sua conta' : 'Informe seus dados'}
           </Text>
           {this.state.stageNew && (
-            <TextInput
+            <AuthInput
               placeholder="Name"
               value={this.state.name}
               style={styles.input}
               onChangeText={name => this.setState({name})}
             />
           )}
-          <TextInput
+          <AuthInput
             placeholder="E-mail"
             value={this.state.email}
             style={styles.input}
             onChangeText={email => this.setState({email})}
           />
-          <TextInput
+          <AuthInput
             placeholder="Password"
             value={this.state.password}
             style={styles.input}
@@ -60,7 +59,7 @@ export default class Auth extends Component {
             onChangeText={password => this.setState({password})}
           />
           {this.state.stageNew && (
-            <TextInput
+            <AuthInput
               placeholder="Confirmate Password"
               value={this.state.confirmPassword}
               style={styles.input}
@@ -118,9 +117,9 @@ const styles = StyleSheet.create({
   input: {
     marginTop: 10,
     backgroundColor: '#FFF',
-    padding: Platform.OS == 'ios' ? 15 : 10,
   },
   button: {
+    borderRadius: 7,
     backgroundColor: '#080',
     marginTop: 10,
     padding: 10,
