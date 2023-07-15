@@ -1,5 +1,5 @@
 import React from 'react';
-import {Platform, ScrollView, View, Text, StyleSheet} from 'react-native';
+import {Platform, ScrollView, View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {ScrollView} from 'react-native';
 import {DrawerItems} from 'react-navigation-drawer';
 import {Gravatar} from 'react-native-gravatar';
