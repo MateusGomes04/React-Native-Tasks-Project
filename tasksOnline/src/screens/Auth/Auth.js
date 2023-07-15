@@ -17,8 +17,8 @@ import AuthInput from '../components/AuthInput';
 import {server, showError, showSuccess} from '../common';
 
 const initialState = {
-  name: '',
-  email: '',
+  name: 'tiao',
+  email: 'tiao@tiao.com',
   password: '',
   confirmPassword: '',
   stageNew: false,
@@ -61,7 +61,7 @@ export default class Auth extends Component {
       });
 
       axios.defaults.headers.common.Authorization = `bearer ${res.data.token}`;
-      this.props.navigation.navigate('Home');
+      this.props.navigation.navigate('Home', res.data);
     } catch (e) {
       showError(e);
     }
